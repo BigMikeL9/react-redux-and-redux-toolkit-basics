@@ -4,9 +4,17 @@ import { createStore } from "redux";
 
 // 1. Create 'Reducer function'
 const counterReducer = (state = { counter: 0 }, action) => {
+  console.log(action);
+
   if (action.type === "INCREMENT") {
     return {
       counter: state.counter + 1,
+    };
+  }
+
+  if (action.type === "INCREASE_BY") {
+    return {
+      counter: state.counter + action.amount,
     };
   }
 
