@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 
 const Counter = () => {
   // 'useSelector()' will automatically be executed for us by 'react-redux'
+  // ⭐⭐ whenever the extracted data from the store changes ('state.counter') ,redux wil re-render/re-execute this component. ⭐⭐
   const counter = useSelector((state) => state.counter);
+  const showCounter = useSelector((state) => state.showCounter);
 
   const dispatch = useDispatch();
 
@@ -21,12 +23,14 @@ const Counter = () => {
     dispatch({ type: "DECREMENT" });
   };
 
-  const toggleCounterHandler = () => {};
+  const toggleCounterHandler = () => {
+    dispatch({ type: "TOGGLE_COUNTER" });
+  };
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {showCounter && <div className={classes.value}>{counter}</div>}
       <div className={classes["buttons-container"]}>
         <button onClick={incrementCounterHandler}>+</button>
         <button onClick={increaseBy}>Increase by 10</button>
