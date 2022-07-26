@@ -1,12 +1,41 @@
 import { createStore } from "redux";
+import { createSlice } from "@reduxjs/toolkit";
 
 // REDUX STORE
 
 const initialState = { counter: 0, showCounter: true };
 
+// ---------------------------------------------------------
+// ----- REDUX Toolkit -----
+createSlice({
+  name: "counter",
+  initialState, // --> 📝 Remember ES6+ syntax that is same as writing 'initialState: initialState,'
+  reducers: {
+    increment(state, action) {
+      // --> 👆👆👆 📝 Remember ES6+ object methods syntax that is the same as writing 'increment: function() {....},'
+
+      state.counter++;
+      // --> ⭐ even tho it seems we are DIRECTLY mutating state property, 'IMMER' package updates the new state in an IMMUTABLE manner behind the scenes. See notes.
+    },
+
+    decrement(state, action) {
+      state.counter--;
+    },
+
+    increaseBy(state, action) {
+      state.counter = state.counter + action.amount;
+    },
+
+    toggleCounter(state, action) {
+      state.showCounter = !state.showCounter;
+    },
+  },
+});
+// ---------------------------------------------------------
+
 // 1. Create 'Reducer function'
 const counterReducer = (state = initialState, action) => {
-  console.log(state);
+  // console.log(state);
   console.log(action);
 
   if (action.type === "INCREMENT") {
