@@ -5,6 +5,7 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 const initialState = { counter: 0, showCounter: true };
 
 // -----------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------
 // 🟢 Redux Toolkit
 
 const counterSlice = createSlice({
@@ -39,6 +40,9 @@ const counterStore = configureStore({
 console.log(counterStore);
 
 export default counterStore;
+// -----------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------
+
 /*
 // -----------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------
@@ -48,7 +52,7 @@ import { createStore } from "redux";
 
 // 1. Create 'Reducer function'
 const counterReducer = (state = initialState, action) => {
-  console.log(state);
+  // console.log(state);
   console.log(action);
 
   if (action.type === "INCREMENT") {
