@@ -1,30 +1,36 @@
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 
+import { counterActions } from "../store/counterStore";
+
 const Counter = () => {
   // 'useSelector()' will automatically be executed for us by 'react-redux'
-  // ⭐⭐ whenever the extracted data from the store changes ('state.counter') ,redux wil re-render/re-execute this component. ⭐⭐
-  const counter = useSelector((state) => state.counter);
-  const showCounter = useSelector((state) => state.showCounter);
+  // ⭐⭐ whenever the extracted data from the store changes ('state.counter'), redux wil re-render/re-execute this component. ⭐⭐
+  const counterStore = useSelector((state) => state.counter);
 
+  const { counter, showCounter } = counterStore;
+
+  console.log(counterStore);
+
+  // --- used to dispatch actions to the store and update the state
   const dispatch = useDispatch();
 
-  console.log(counter);
+  // console.log(counter);
 
   const incrementCounterHandler = () => {
-    dispatch({ type: "INCREMENT" });
+    dispatch(counterActions.increment());
   };
 
   const increaseBy = () => {
-    dispatch({ type: "INCREASE_BY", amount: 10 });
+    dispatch(counterActions.increase_By({ amount: 10 })); // passing an 'Action Payload' with a property name, in an object, as an argument.
   };
 
   const decrementCounterHandler = () => {
-    dispatch({ type: "DECREMENT" });
+    dispatch(counterActions.decrement());
   };
 
   const toggleCounterHandler = () => {
-    dispatch({ type: "TOGGLE_COUNTER" });
+    dispatch(counterActions.toggleCounter());
   };
 
   return (
