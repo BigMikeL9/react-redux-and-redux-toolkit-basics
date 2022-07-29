@@ -2,11 +2,11 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 // REDUX STORE
 
-const initialState = { counter: 0, showCounter: true };
-
 // -----------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------
 // 🟢 Redux Toolkit
+
+const initialState = { counter: 0, showCounter: true };
 
 /* A slice of our global store state. Can have multiple state slices.
     -- Add the State slices reducer methods (in its 'reducers' property) to the 'configureStore()' function 
@@ -35,12 +35,6 @@ const counterSlice = createSlice({
   },
 });
 
-const counterStore = configureStore({
-  reducer: {
-    counter: counterSlice.reducer, // ---> ⭐⭐⭐ the property name 'counter' will be used in components 'useSelector' hook to access this state slice
-  },
-});
-
 /*  
     - 'counterActions' variable will contain automatically generated reducer methods from the reducer methods we created in 'counterSlice'. 
     - When dispatching actions, we call these reducer methods which will then create an 'Action Objects'. Thus these automatically generated methods are called 'Action Creators'
@@ -50,60 +44,7 @@ const counterStore = configureStore({
     
 */
 
-// -- Will be used in app components to dispatch action to the store
+// -- Make the 'actions' available to be imported in other components and used to dispatch 'actions' to the store.
 export const counterActions = counterSlice.actions;
 
-export default counterStore;
-// -----------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------
-
-/*
-// -----------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------
-/🔴 STANDARD Redux  WITHOUT  Redux Toolkit
-
-import { createStore } from "redux";
-
-// 1. Create 'Reducer function'
-const counterReducer = (state = initialState, action) => {
-  // console.log(state);
-  console.log(action);
-
-  if (action.type === "INCREMENT") {
-    return {
-      counter: state.counter + 1,
-      showCounter: state.showCounter,
-    };
-  }
-
-  if (action.type === "INCREASE_BY") {
-    return {
-      counter: state.counter + action.amount,
-      showCounter: state.showCounter,
-    };
-  }
-
-  if (action.type === "DECREMENT") {
-    return {
-      counter: state.counter - 1,
-      showCounter: state.showCounter,
-    };
-  }
-
-  if (action.type === "TOGGLE_COUNTER") {
-    return {
-      counter: state.counter,
-      showCounter: !state.showCounter,
-    };
-  }
-
-  return state;
-};
-
-// 2. Create the Redux Store and pass in the 'Reducer function'
-const counterStore = createStore(counterReducer);
-
-// 3. Provide the Redux store to the React App. ie:  Connect the React app to the Redux store, so that components in this App can dispatch and listen to changes in the store.
-// export default counterStore;
-// -----------------------------------------------------------------------------------------
-*/
+export default counterSlice;
